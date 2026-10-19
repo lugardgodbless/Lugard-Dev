@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Lugard-Dev — aspiring full-stack developer building clean, useful digital experiences." />
+  <meta name="theme-color" content="#0b0d0e" />
+  <title>Lugard-Dev — Full-Stack Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0b0d0e; --panel:#111415; --panel2:#151919; --line:#252b29; --text:#f2f5f2; --muted:#a0aaa4; --green:#8dffb0; --green2:#b4ffca; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:Manrope,system-ui,sans-serif; line-height:1.6; }
+    a { color:inherit; text-decoration:none; }
+    button, a { -webkit-tap-highlight-color:transparent; }
+    .wrap { width:min(1120px, calc(100% - 40px)); margin:auto; }
+    .mono { font-family:"DM Mono",monospace; }
+    .topbar { position:sticky; top:0; z-index:20; background:rgba(11,13,14,.82); backdrop-filter:blur(16px); border-bottom:1px solid rgba(255,255,255,.06); }
+    nav { min-height:76px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .brand { display:flex; align-items:center; gap:11px; font-weight:800; letter-spacing:-.04em; }
+    .mark { display:grid; place-items:center; width:38px; height:38px; border:1px solid #385744; background:#14251a; color:var(--green); border-radius:11px; font-size:13px; letter-spacing:-.06em; }
+    .navlinks { display:flex; align-items:center; gap:28px; color:var(--muted); font-size:13px; }
+    .navlinks a:hover { color:var(--green); }
+    .nav-cta,.btn { display:inline-flex; align-items:center; justify-content:center; gap:10px; border-radius:9px; padding:12px 17px; font-weight:800; font-size:13px; transition:.2s ease; }
+    .nav-cta,.btn.primary { background:var(--green); color:#0b1710; }
+    .nav-cta:hover,.btn.primary:hover { background:var(--green2); transform:translateY(-2px); }
+    .btn.secondary { border:1px solid #343b37; background:#121615; color:var(--text); }
+    .btn.secondary:hover { border-color:var(--green); }
+    .hero { padding:100px 0 88px; position:relative; overflow:hidden; }
+    .hero:before { content:""; position:absolute; width:570px; height:570px; right:-100px; top:-220px; background:radial-gradient(circle,rgba(91,255,139,.11),transparent 68%); pointer-events:none; }
+    .eyebrow { color:var(--green); font-size:11px; letter-spacing:.15em; text-transform:uppercase; display:flex; align-items:center; gap:10px; }
+    .dot { width:7px; height:7px; border-radius:50%; background:var(--green); box-shadow:0 0 15px #8dffb0; }
+    h1 { font-size:clamp(46px,7.6vw,88px); line-height:1.02; letter-spacing:-.075em; margin:24px 0; max-width:850px; }
+    h1 span { color:var(--green); }
+    .hero-copy { color:var(--muted); max-width:600px; font-size:17px; line-height:1.85; }
+    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:30px; }
+    .hero-foot { display:flex; gap:24px; flex-wrap:wrap; color:#7f8982; font-size:11px; letter-spacing:.06em; margin-top:54px; text-transform:uppercase; }
+    .hero-foot span:before { content:"↗"; color:var(--green); margin-right:8px; }
+    .section { padding:76px 0; border-top:1px solid rgba(255,255,255,.065); }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:24px; margin-bottom:32px; }
+    .kicker { color:var(--green); font-size:11px; letter-spacing:.15em; text-transform:uppercase; }
+    h2 { font-size:clamp(30px,4vw,46px); line-height:1.12; letter-spacing:-.06em; margin:12px 0 0; }
+    .section-intro { color:var(--muted); max-width:460px; font-size:14px; }
+    .about-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:18px; }
+    .card { background:linear-gradient(145deg,#131716,#0f1211); border:1px solid var(--line); border-radius:16px; padding:28px; }
+    .about-card p { color:var(--muted); font-size:15px; line-height:1.9; }
+    .about-card strong { color:var(--text); }
+    .stat-list { display:grid; gap:12px; }
+    .stat { border:1px solid var(--line); background:#101312; padding:20px; border-radius:13px; }
+    .stat .big { color:var(--green); font-size:24px; font-weight:800; letter-spacing:-.05em; }
+    .stat p { margin:4px 0 0; color:var(--muted); font-size:12px; }
+    .skills { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
+    .skill { border:1px solid #303a33; color:#d8e3da; background:#141a16; padding:9px 12px; border-radius:7px; font-size:12px; }
+    .skill.learning { border-style:dashed; color:var(--muted); }
+    .projects { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .project { overflow:hidden; padding:0; }
+    .project-art { height:190px; border-bottom:1px solid var(--line); padding:20px; display:flex; align-items:center; justify-content:center; background:radial-gradient(circle at 50% 30%,#1d3b29,#111715 68%); }
+    .project:nth-child(2) .project-art { background:radial-gradient(circle at 50% 30%,#24394b,#111517 68%); }
+    .project:nth-child(3) .project-art { background:radial-gradient(circle at 50% 30%,#44301f,#171310 68%); }
+    .mock-window { width:100%; max-width:280px; border:1px solid #46544a; border-radius:8px; background:#0d110f; overflow:hidden; box-shadow:0 18px 35px #0008; transform:rotate(-2deg); }
+    .windowbar { height:20px; border-bottom:1px solid #27312a; display:flex; gap:4px; align-items:center; padding:0 8px; }
+    .windowbar i { width:5px; height:5px; background:#59655d; border-radius:50%; }
+    .windowbody { padding:13px; }
+    .mockline { height:5px; background:#334238; border-radius:4px; margin:7px 0; width:75%; }
+    .mockline.short { width:42%; background:#8dffb0; }
+    .mockblocks { display:grid; grid-template-columns:repeat(3,1fr); gap:5px; margin-top:13px; }
+    .mockblocks span { height:40px; background:#1a2820; border:1px solid #2d4935; border-radius:4px; }
+    .project-body { padding:22px; }
+    .project-type { color:var(--green); font-size:10px; letter-spacing:.12em; text-transform:uppercase; }
+    h3 { margin:9px 0; font-size:19px; letter-spacing:-.04em; }
+    .project-body p { color:var(--muted); font-size:13px; min-height:62px; }
+    .tags { display:flex; gap:7px; flex-wrap:wrap; margin:16px 0; }
+    .tags span { color:#a8b4ab; font-size:10px; background:#1b211d; padding:5px 7px; border-radius:5px; }
+    .project-link { color:var(--green); font-size:12px; font-weight:800; }
+    .note { margin-top:18px; padding:14px 16px; border:1px dashed #435248; border-radius:10px; color:var(--muted); font-size:12px; }
+    .process-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+    .process-num { font-family:"DM Mono",monospace; color:var(--green); font-size:12px; }
+    .process-card h3 { margin-top:22px; }
+    .process-card p { color:var(--muted); font-size:13px; }
+    .contact-box { border:1px solid #314337; border-radius:18px; padding:clamp(26px,5vw,54px); background:radial-gradient(circle at 90% 10%,rgba(141,255,176,.09),transparent 38%),#101412; display:flex; justify-content:space-between; align-items:center; gap:30px; }
+    .contact-box p { color:var(--muted); max-width:510px; }
+    footer { padding:26px 0; color:#7f8982; font-size:11px; }
+    .footer-inner { display:flex; justify-content:space-between; gap:20px; flex-wrap:wrap; }
+    .mobile-menu { display:none; }
+    @media (max-width:800px) {
+      .navlinks { gap:14px; }
+      .navlinks a:not(.nav-cta) { display:none; }
+      .about-grid { grid-template-columns:1fr; }
+      .projects { grid-template-columns:1fr 1fr; }
+      .projects .project:last-child { grid-column:span 2; }
+      .section-head { display:block; }
+      .section-intro { margin-top:14px; }
+      .contact-box { align-items:flex-start; flex-direction:column; }
+    }
+    @media (max-width:520px) {
+      .wrap { width:min(100% - 28px,1120px); }
+      nav { min-height:66px; }
+      .navlinks { gap:0; }
+      .navlinks .nav-cta { padding:10px 12px; font-size:11px; }
+      .hero { padding:76px 0 60px; }
+      .hero-copy { font-size:15px; }
+      .hero-foot { margin-top:38px; gap:12px; }
+      .section { padding:58px 0; }
+      .projects,.process-grid { grid-template-columns:1fr; }
+      .projects .project:last-child { grid-column:auto; }
+      .project-body p { min-height:0; }
+      .card { padding:21px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <nav class="wrap">
+      <a class="brand" href="#home" aria-label="Lugard-Dev home"><span class="mark">L/D</span><span>Lugard<span style="color:var(--green)">-Dev</span></span></a>
+      <div class="navlinks">
+        <a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a>
+        <a class="nav-cta" href="#contact">Let's talk <span>↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap" id="home">
+      <div class="eyebrow mono"><span class="dot"></span> Aspiring full-stack developer</div>
+      <h1>Building digital<br>experiences that<br><span>make an impact.</span></h1>
+      <p class="hero-copy">I'm Lugard — an aspiring full-stack developer focused on learning, creating, and turning thoughtful ideas into clean, useful web experiences. This is where my journey and projects come to life.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#projects">Explore my projects <span>↓</span></a>
+        <a class="btn secondary" href="#contact">Get in touch <span>↗</span></a>
+      </div>
+      <div class="hero-foot mono"><span>Curious by nature</span><span>Focused on the details</span><span>Always learning</span></div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker mono">01 / A little about me</div><h2>Learning to build<br>from front to back.</h2></div>
+          <p class="section-intro">Good software isn't just code. It's solving a real problem with clarity, care, and a great experience for the person using it.</p>
+        </div>
+        <div class="about-grid">
+          <div class="card about-card">
+            <div class="eyebrow mono">The person behind the screen</div>
+            <p>I'm building my foundation in <strong>full-stack web development</strong>, starting with the fundamentals and growing through hands-on projects. I enjoy breaking big problems into smaller steps and learning how each part of a website works together.</p>
+            <p>My goal is to create responsive, accessible, and dependable digital products while continuously improving my skills. I'm currently building portfolio projects to turn what I learn into real, demonstrable work.</p>
+          </div>
+          <div class="stat-list">
+            <div class="stat"><div class="big">01</div><p>Learn the fundamentals properly</p></div>
+            <div class="stat"><div class="big">02</div><p>Build projects that solve useful problems</p></div>
+            <div class="stat"><div class="big">03</div><p>Keep improving with every release</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker mono">02 / Tools & technologies</div><h2>Building my toolkit.</h2></div>
+          <p class="section-intro">These are the technologies I'm working toward using. I'll update this section as I gain practical experience.</p>
+        </div>
+        <div class="card">
+          <div class="kicker mono">Core foundations</div>
+          <div class="skills"><span class="skill learning">HTML</span><span class="skill learning">CSS</span><span class="skill learning">JavaScript</span><span class="skill learning">Git & GitHub</span></div>
+          <div class="kicker mono" style="margin-top:28px">Next learning goals</div>
+          <div class="skills"><span class="skill learning">React</span><span class="skill learning">Node.js</span><span class="skill learning">REST APIs</span><span class="skill learning">Databases</span><span class="skill learning">Deployment</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="kicker mono">03 / Selected work</div><h2>Projects in progress.</h2></div>
+          <p class="section-intro">A starting roadmap of practical projects. Replace these cards with your real work as you complete each build.</p>
+        </div>
+        <div class="projects">
+          <article class="card project">
+            <div class="project-art"><div class="mock-window"><div class="windowbar"><i></i><i></i><i></i></div><div class="windowbody"><div class="mockline short"></div><div class="mockline"></div><div class="mockline" style="width:58%"></div><div class="mockblocks"><span></span><span></span><span></span></div></div></div></div>
+            <div class="project-body"><div class="project-type mono">Project idea / 01</div><h3>Personal Portfolio</h3><p>A responsive personal site to introduce myself, showcase work, and make it easy for people to get in touch.</p><div class="tags"><span>HTML</span><span>CSS</span><span>Responsive UI</span></div><a class="project-link" href="#contact">Build roadmap ↗</a></div>
+          </article>
+          <article class="card project">
+            <div class="project-art"><div class="mock-window"><div class="windowbar"><i></i><i></i><i></i></div><div class="windowbody"><div class="mockline short" style="background:#8bcaff"></div><div class="mockline" style="width:90%"></div><div class="mockline" style="width:68%"></div><div class="mockblocks"><span style="background:#1a2835;border-color:#2b4558"></span><span style="background:#1a2835;border-color:#2b4558"></span><span style="background:#1a2835;border-color:#2b4558"></span></div></div></div></div>
+            <div class="project-body"><div class="project-type mono">Project idea / 02</div><h3>Task Manager</h3><p>A simple productivity app for creating tasks, tracking progress, and practicing interactive UI and data handling.</p><div class="tags"><span>JavaScript</span><span>React</span><span>Local storage</span></div><a class="project-link" href="#contact">Build roadmap ↗</a></div>
+          </article>
+          <article class="card project">
+            <div class="project-art"><div class="mock-window"><div class="windowbar"><i></i><i></i><i></i></div><div class="windowbody"><div class="mockline short" style="background:#ffca8b"></div><div class="mockline"></div><div class="mockline" style="width:53%"></div><div class="mockblocks"><span style="background:#30251a;border-color:#5b432b"></span><span style="background:#30251a;border-color:#5b432b"></span><span style="background:#30251a;border-color:#5b432b"></span></div></div></div></div>
+            <div class="project-body"><div class="project-type mono">Project idea / 03</div><h3>Storefront Demo</h3><p>A sample product catalog with category filters, product details, and a cart flow to practice e-commerce patterns.</p><div class="tags"><span>React</span><span>API concepts</span><span>UI design</span></div><a class="project-link" href="#contact">Build roadmap ↗</a></div>
+          </article>
+        </div>
+        <div class="note"><strong style="color:var(--green)">Portfolio honesty:</strong> These are proposed practice projects, not completed client work. Keep them labeled this way until you've built them, then link to the live demos and source code.</div>
+      </div>
+    </section>
+
+    <section class="section" id="approach">
+      <div class="wrap">
+        <div class="section-head"><div><div class="kicker mono">04 / How I work</div><h2>Small steps. Real progress.</h2></div></div>
+        <div class="process-grid">
+          <div class="card process-card"><div class="process-num">STEP_01</div><h3>Understand</h3><p>Clarify the goal, who it's for, and what a useful result should look like.</p></div>
+          <div class="card process-card"><div class="process-num">STEP_02</div><h3>Build & learn</h3><p>Break the work into manageable pieces, test ideas, and improve the details.</p></div>
+          <div class="card process-card"><div class="process-num">STEP_03</div><h3>Refine</h3><p>Check mobile layouts, fix issues, and make the experience clearer and easier to use.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="wrap">
+        <div class="contact-box">
+          <div><div class="kicker mono">05 / Contact</div><h2>Have an idea?<br>Let's connect.</h2><p>I'm open to connecting with developers, learning communities, and people building useful digital products. Reach out and let's start a conversation.</p></div>
+          <a class="btn primary" href="mailto:hello@lugard.dev?subject=Hello%20Lugard-Dev">Email me <span>↗</span></a>
+        </div>
+        <p style="color:#7f8982;font-size:11px;margin-top:14px">Before publishing, replace the sample email with your real contact address and add your GitHub or LinkedIn profile.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap footer-inner"><span>© <span id="year"></span> Lugard-Dev. Built with curiosity.</span><span class="mono">DESIGNED TO KEEP GROWING ↗</span></div></footer>
+  <script>document.getElementById("year").textContent = new Date().getFullYear();</script>
+</body>
+</html>
